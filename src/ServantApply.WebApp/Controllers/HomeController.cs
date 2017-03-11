@@ -24,7 +24,7 @@ namespace ServantApply.WebApp.Controllers
                 Name = "hu",
                 Last_name = "XianWei"
             };
-            userManager.CreateAsync(user);
+            //userManager.CreateAsync(user);
             return View();
         }
 
@@ -38,7 +38,7 @@ namespace ServantApply.WebApp.Controllers
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
-
+            userManager.QueryAsync();
             return View();
         }
 

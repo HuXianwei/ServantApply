@@ -9,5 +9,11 @@ namespace ServantApply.Common.IManagers
     public interface IUserManager
     {
         Task CreateAsync(User user);
+
+        /// <summary>
+        /// 查
+        /// </summary>
+        /// <returns></returns>
+        Task<List<User>> QueryAsync();
     }
 }

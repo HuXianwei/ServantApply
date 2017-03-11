@@ -16,5 +16,7 @@ namespace ServantApply.Common.Models
 
         [MaxLength(50)]
         public string Last_name { get; set; }
+
+        public List<Test> Tests { get; set; } 
     }
 }

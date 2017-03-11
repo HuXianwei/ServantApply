@@ -45,15 +45,13 @@ namespace ServantApply.Core
         /// <returns></returns>
         public async Task<List<User>> QueryAsync()
         {
-            IQueryable<User> query = context.Set<User>();
+            //var takeUser = await context.User_users.TakeWhile(c => c.Id == 1).ToListAsync();
+            var userModel = await context.User_users.SingleAsync(c => c.Id == 1);
             var user = context.User_users.Single(b => b.Id == 1);
             var users = await context.User_users.ToListAsync();
-            var tmp = "ew";
-            var Userss = context.User_users.Where(c => c.Name.Contains(tmp.Trim())).ToList();
-            var usersss = context.User_users.FromSql("Select * from user_users where id > 10").ToList();
-            //IQueryable<User> query = context.User_users.Take(10);
-            //await context.SaveChangesAsync();
-            return query.ToList();
+            //var Userss = context.User_users.Where(c => c.Name.Contains("ew".Trim())).ToList();    //contains存在问题
+            var usersss = context.User_users.FromSql("Select * from user_users where id > 10 limit 0, 10").ToList();
+            return usersss;
         }
 
         /// <summary>
