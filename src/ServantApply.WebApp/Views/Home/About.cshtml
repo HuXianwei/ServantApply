@@ -1,4 +1,5 @@
 ﻿@using ServantApply.Common.Models
+@using ServantApply.WebApp.Helpers
 @model User
 @{
     ViewData["Title"] = "About";
@@ -35,10 +36,17 @@
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" , style="color:blue;"})
             <div class="col-md-10 form-inline">
                 @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Name, "",  htmlAttributes: new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("education", "学历", new { @class = "control-label col-md-2", style = "color:blue;" })
+            <div class="col-md-10 form-inline">
+                @Html.DropDownList("type", EducationTypeHelper.GetItems(), new { @class = "form-control" })
             </div>
         </div>
 

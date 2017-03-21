@@ -10,9 +10,25 @@ namespace ServantApply.Common
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<User> User_users { get; set; }
+        /// <summary>
+        /// 用户表
+        /// </summary>
+        public DbSet<User> User { get; set; }
 
-        public DbSet<Test> Test { get; set; }
+        /// <summary>
+        /// 岗位表
+        /// </summary>
+        public DbSet<Job> Job { get; set; }
+
+        /// <summary>
+        /// 报名记录表
+        /// </summary>
+        public DbSet<Record> Record { get; set; }
+
+        /// <summary>
+        /// 考生表
+        /// </summary>
+        public DbSet<Candidate> Candidate { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

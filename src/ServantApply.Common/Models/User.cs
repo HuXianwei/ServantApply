@@ -6,17 +6,33 @@ using System.Threading.Tasks;
 
 namespace ServantApply.Common.Models
 {
+    /// <summary>
+    /// 用户
+    /// </summary>
     public class User
     {
+        /// <summary>
+        /// 主键ID
+        /// </summary>
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "没有什么")]
-        [StringLength(30, ErrorMessage = "名字太长")]
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        [Required(ErrorMessage = "用户名不能为空")]
+        [StringLength(8, ErrorMessage = "用户名不超过8个字符")]
         public string Name { get; set; }
 
-        [MaxLength(50)]
-        public string Last_name { get; set; }
-
-        public List<Test> Tests { get; set; } 
+        /// <summary>
+        /// 密码
+        /// </summary>
+        [MinLength(6, ErrorMessage ="密码不能小于6个字符")]
+        [MaxLength(30, ErrorMessage = "密码不能超过6个字符")]
+        public string Password { get; set; }
+        
+        /// <summary>
+        /// 角色 
+        /// </summary>
+        public int Role { get; set; } 
     }
 }

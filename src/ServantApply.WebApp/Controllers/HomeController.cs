@@ -22,7 +22,7 @@ namespace ServantApply.WebApp.Controllers
         {
             User user = new User {
                 Name = "hu",
-                Last_name = "XianWei"
+                Role = 1
             };
             //userManager.CreateAsync(user);
             return View();

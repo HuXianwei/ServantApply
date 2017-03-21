@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ServantApply.Common;
+using ServantApply.Common.Enums;
 using ServantApply.Common.IManagers;
 using ServantApply.Common.Models;
 using System;
@@ -24,7 +25,7 @@ namespace ServantApply.Core
         /// <returns></returns>
         public async Task CreateAsync(User user)
         {
-            context.User_users.Add(user);
+            context.User.Add(user);
             await context.SaveChangesAsync();
         }
 
@@ -35,7 +36,7 @@ namespace ServantApply.Core
         /// <returns></returns>
         public async Task DeleteAsync(User user)
         {
-            context.User_users.Remove(user);
+            context.User.Remove(user);
             await context.SaveChangesAsync();
         }
 
@@ -46,11 +47,11 @@ namespace ServantApply.Core
         public async Task<List<User>> QueryAsync()
         {
             //var takeUser = await context.User_users.TakeWhile(c => c.Id == 1).ToListAsync();
-            var userModel = await context.User_users.SingleAsync(c => c.Id == 1);
-            var user = context.User_users.Single(b => b.Id == 1);
-            var users = await context.User_users.ToListAsync();
+            var userModel = await context.User.SingleAsync(c => c.Id == 1);
+            var user = context.User.Single(b => b.Id == 1);
+            var users = await context.User.ToListAsync();
             //var Userss = context.User_users.Where(c => c.Name.Contains("ew".Trim())).ToList();    //contains存在问题
-            var usersss = context.User_users.FromSql("Select * from user_users where id > 10 limit 0, 10").ToList();
+            var usersss = context.User.FromSql("Select * from user_users where id > 10 limit 0, 10").ToList();
             return usersss;
         }
 
@@ -61,7 +62,7 @@ namespace ServantApply.Core
         /// <returns></returns>
         public async Task UpdateAsync(User user)
         {
-            context.User_users.Update(user);
+            context.User.Update(user);
             await context.SaveChangesAsync();
         }
     }
