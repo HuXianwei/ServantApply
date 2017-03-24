@@ -1,0 +1,58 @@
+﻿@using ServantApply.WebApp.Helpers
+@model List<Job>
+
+@*@for (var i = 0; i < Model.Count; i++)
+ {
+     var job = Model[i];
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span>@job.Name</span>  
+                <span style="color:black;">&nbsp&nbsp&nbsp(所属单位：@job.Organization)</span>
+                <span style="float:right"><button style="padding-top:0px;" type="button" class="btn btn-primary publish" data-question="">修改</button></span>
+                <span style="float:right"><a style="padding-top:0px;" class="btn btn-danger remove" data-dismiss="modal">删除</a></span>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <span>@job.Content</span>
+            <span style='float:right'>
+                <a class="btn btn-primary btn-lg btn-success start-btn">
+                    <span class="glyphicon glyphicon-play-circle"></span>详情
+                </a>
+            </span>
+        </div>
+    </div>
+}*@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>我的创建</h3>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>岗位</th>
+                <th>部门名称</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+           @for (var i = 0; i < Model.Count; i++)
+           {
+                var job = Model[i];
+                <tr>
+                    <th scope="row">@((job.Id).ToString("D8"))</th>
+                    <td>@job.Name</td>
+                    <td>@job.Organization</td>
+                    <td>
+                        <span><a href="/Job/Details?id=@job.Id">详情</a></span><span>&nbsp|</span>
+                        <span><a asp-controller="Job" asp-action="Edit">修改</a></span><span>&nbsp|</span>
+                        <span><a asp-controller="Job" asp-action="delete">删除</a></span>
+                    </td>
+                </tr>
+           }
+        </tbody>
+    </table>
+</div>
+
+

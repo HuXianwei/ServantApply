@@ -8,6 +8,7 @@ namespace ServantApply.Common.IManagers
 {
     public interface IUserManager
     {
+
         Task CreateAsync(User user);
 
         /// <summary>

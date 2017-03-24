@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using ServantApply.WebApp.Helpers
+@using ServantApply.Common.Enums
+@model Job
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>详情</h4>
+    </div>
+    <table class="table">
+        <tr><td><b>岗位名称</b></td><td>@Model.Name</td></tr>
+        <tr><td><b>岗位描述</b></td><td>@Model.Content</td></tr>
+        <tr><td><b>部门名称</b></td><td>@Model.Organization</td></tr>
+        <tr><td><b>所在地址</b></td><td>@Model.Address</td></tr>
+        <tr><td><b>年龄要求</b></td><td>@Model.AgeAsk</td></tr>
+        <tr><td><b>性别要求</b></td><td>@(((SexType)Model.SexAsk).GetDescription())</td></tr>
+        <tr><td><b>学历要求</b></td><td>@(((EducationType)Model.EducationAsk).GetDescription())</td></tr>
+    </table>
+</div>

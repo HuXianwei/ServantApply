@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "About";
 }
+
 <h2>@ViewData["Title"].</h2>
 <h3>@ViewData["Message"]</h3>
 
@@ -36,7 +37,7 @@
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" , style="color:blue;"})
+            @Html.LabelFor(model => model.Name, "姓名", new { @class = "control-label col-md-2" , style="color:blue;"})
             <div class="col-md-10 form-inline">
                 @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Name, "",  htmlAttributes: new { @class = "text-danger" })
@@ -44,9 +45,9 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("education", "学历", new { @class = "control-label col-md-2", style = "color:blue;" })
+            @Html.Label("Education", "学历", new { @class = "control-label col-md-2", style = "color:blue;" })
             <div class="col-md-10 form-inline">
-                @Html.DropDownList("type", EducationTypeHelper.GetItems(), new { @class = "form-control" })
+                @Html.DropDownList("Education", EducationTypeHelper.GetItems(), new { @class = "form-control" })
             </div>
         </div>
 

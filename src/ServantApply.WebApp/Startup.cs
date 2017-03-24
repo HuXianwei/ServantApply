@@ -45,6 +45,7 @@ namespace ServantApply.WebApp
             services.AddMvc();
             //注入Manager服务
             services.AddTransient<IUserManager, UserManager>();
+            services.AddTransient<IJobManager, JobManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

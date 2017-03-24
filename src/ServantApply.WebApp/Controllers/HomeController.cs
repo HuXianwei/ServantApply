@@ -56,5 +56,6 @@ namespace ServantApply.WebApp.Controllers
             }
             return View("About", user);
         }
+      
     }
 }

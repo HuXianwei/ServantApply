@@ -19,4 +19,25 @@ namespace ServantApply.Common.Enums
         /// </summary>
         Woman = 2
     }
+    public static class SexTypeExtension{
+        /// <summary>
+        /// 获取枚举描述
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static String GetDescription(this SexType type)
+        {
+            switch (type)
+            {
+                case SexType.Man:return "男";
+                case SexType.Woman:return "女";
+                default: return "";
+            }
+        }
+    public static int GetValue(this SexType type)
+        {
+            return (int)type;
+        }
+
+    }
 }
