@@ -6,10 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using ServantApply.Common.IManagers;
 using ServantApply.Common.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http.Features.Authentication;
+using Microsoft.AspNetCore.Authentication;
+using ServantApply.WebApp.Helpers;
 
 namespace ServantApply.WebApp.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IUserManager userManager;
@@ -25,13 +29,16 @@ namespace ServantApply.WebApp.Controllers
                 Role = 1
             };
             //userManager.CreateAsync(user);
+            var name = HttpContext.User.Identity.FullName();
+            var role = HttpContext.User.Identity.Role();
             return View();
         }
 
+        [Authorize(Roles = "System")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-
+            
             return View();
         }
 
