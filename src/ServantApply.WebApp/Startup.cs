@@ -11,6 +11,9 @@ using ServantApply.Common.IManagers;
 using ServantApply.Core;
 using ServantApply.Common;
 using MySQL.Data.EntityFrameworkCore.Extensions;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using ServantApply.Common.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace ServantApply.WebApp
 {
@@ -41,6 +44,13 @@ namespace ServantApply.WebApp
             services.AddApplicationInsightsTelemetry(Configuration);
             //注入数据库上下文
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+            ////注入身份验证
+            //services.AddIdentity<User, IdentityRole>(options => {
+            //    options.Cookies.ApplicationCookie.AuthenticationScheme = "ApplicationCookie";
+            //    options.Cookies.ApplicationCookie.CookieName = "Interop";
+            //})
+            //.AddEntityFrameworkStores<ApplicationDbContext>()
+            //.AddDefaultTokenProviders();
             //添加MVC
             services.AddMvc();
             //注入Manager服务
@@ -66,6 +76,18 @@ namespace ServantApply.WebApp
             }
 
             app.UseApplicationInsightsExceptionTelemetry();
+
+            // 使用了 CookieAuthentication 中间件做身份认证
+            //app.UseIdentity();
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = "IdeaCoreUser",
+                LoginPath = new PathString("/Account/Login/"),
+                AccessDeniedPath = new PathString("/Account/Forbidden/"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            });
 
             app.UseStaticFiles();
 

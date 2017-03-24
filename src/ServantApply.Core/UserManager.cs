@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Authentication;
+using Microsoft.EntityFrameworkCore;
 using ServantApply.Common;
 using ServantApply.Common.Enums;
 using ServantApply.Common.IManagers;
@@ -6,6 +8,9 @@ using ServantApply.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ServantApply.Core
@@ -63,6 +68,27 @@ namespace ServantApply.Core
         public async Task UpdateAsync(User user)
         {
             context.User.Update(user);
+            await context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// 根据用户名获取用户
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public async Task<User> GetUserByNameAsync(string name)
+        {
+            return (await context.User.Where(c => c.Name == name).ToListAsync()).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 注册用户
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public async Task RegisterAsync(User user)
+        {
+            context.User.Add(user);
             await context.SaveChangesAsync();
         }
     }

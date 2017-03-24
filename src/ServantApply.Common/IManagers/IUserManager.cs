@@ -15,5 +15,19 @@ namespace ServantApply.Common.IManagers
         /// </summary>
         /// <returns></returns>
         Task<List<User>> QueryAsync();
+
+        /// <summary>
+        /// 根据用户名获取用户
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        Task<User> GetUserByNameAsync(string name);
+
+        /// <summary>
+        /// 注册用户
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        Task RegisterAsync(User user);
     }
 }
