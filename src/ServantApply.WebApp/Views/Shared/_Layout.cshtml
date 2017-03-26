@@ -31,11 +31,22 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="Job" asp-action="Create">新增岗位</a></li>
-                    <li><a asp-area="" asp-controller="Job" asp-action="JobList">岗位列表</a></li>
+                    @{
+                        if (Html.ViewContext.HttpContext.User.Identity.Role() == RoleType.User.GetDescription())
+                        {
+                            <li><a asp-area="" asp-controller="Job" asp-action="AllJob">全部岗位</a></li>
+
+                        }
+                        else
+                        {
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                            <li><a asp-area="" asp-controller="Job" asp-action="Create">新增岗位</a></li>
+                            <li><a asp-area="" asp-controller="Job" asp-action="JobList">岗位列表</a></li>
+
+                        }
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">

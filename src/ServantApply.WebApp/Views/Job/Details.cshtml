@@ -3,6 +3,23 @@
 *@
 @using ServantApply.WebApp.Helpers
 @using ServantApply.Common.Enums
+@section scripts{
+    <script type="text/javascript">
+        $(document).on("click", "#join-job", function (event) {
+            $.post("/Candidate/Enter", { id: $(this).attr("data-id") }, function (result) {
+                if (result.isSuccess) {
+                    window.location.href = "/Home/index";
+
+                } else {
+                    var tmp = confirm("个人信息不完整，是否填写？")
+                    if (tmp == true) {
+                        window.open("/Candidate/Message", "_blank");
+                    }
+                }
+            });
+         });   
+    </script>
+}
 @model Job
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -18,3 +35,9 @@
         <tr><td><b>学历要求</b></td><td>@(((EducationType)Model.EducationAsk).GetDescription())</td></tr>
     </table>
 </div>
+@if (Html.ViewContext.HttpContext.User.Identity.Role() == RoleType.User.GetDescription())
+{
+    <div style="text-align:center;">
+        <span><a href="javascript:void(0)"class="btn btn-primary" id="join-job" data-id="@Model.Id">报名</a></span>
+    </div>
+}

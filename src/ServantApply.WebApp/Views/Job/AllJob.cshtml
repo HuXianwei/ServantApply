@@ -1,0 +1,39 @@
+﻿@using ServantApply.WebApp.Helpers
+@model List<Job>
+
+@{
+    ViewData["jobId"] = 0;
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>全部岗位</h3>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>岗位</th>
+                <th>部门名称</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                var job = Model[i];
+                <tr>
+                    <th scope="row">@((job.Id).ToString("D8"))</th>
+                    <td>@job.Name</td>
+                    <td>@job.Organization</td>
+                    <td>
+                        <span><a href="/Job/Details?id=@job.Id">详情</a></span><span>&nbsp|</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

@@ -15,17 +15,15 @@ namespace ServantApply.WebApp.Helpers
         /// <param name="type"></param>
         /// <param name="show"></param>
         /// <returns></returns>
-        public static List<SelectListItem> GetItems(int type=0,bool show=false)
+        public static List<SelectListItem> GetItems(int type=0,bool showNull=false)
         {
             List<SelectListItem> list = new List<SelectListItem>();
-            if (show)
-            {
-                list.Add(new SelectListItem { Text = "请选择", Value = "0" });
+            if (showNull)
+                list.Add(new SelectListItem { Text = "不限", Value = "0" });
                 foreach (SexType item in Enum.GetValues(typeof(SexType)))
                 {
                     list.Add(new SelectListItem { Text = item.GetDescription(), Value = item.GetValue().ToString(), Selected = type == item.GetValue() ? true : false });
                 }
-            }
             return list;
         }
         /// <summary>

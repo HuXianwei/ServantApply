@@ -19,5 +19,11 @@ namespace ServantApply.WebApp.Helpers
             var claim = ((ClaimsIdentity)identity).FindFirst(ClaimTypes.Role);
             return (claim != null) ? claim.Value : string.Empty;
         }
+
+        public static long Uid(this IIdentity identity)
+        {
+            var claim = ((ClaimsIdentity)identity).FindFirst(ClaimTypes.Sid);
+            return (claim != null) ? Convert.ToInt64(claim.Value) : 0;
+        }
     }
 }

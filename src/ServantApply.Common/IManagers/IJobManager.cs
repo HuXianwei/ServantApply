@@ -30,5 +30,19 @@ namespace ServantApply.Common.IManagers
         /// </summary>
         /// <returns></returns>
         Task<Job> GetDetails(long id);
+
+        /// <summary>
+        /// 删除岗位
+        /// </summary>
+        /// <param name="job"></param>
+        /// <returns></returns>
+        Task DeleteJob(Job job);
+
+        /// <summary>
+        /// 更新岗位
+        /// </summary>
+        /// <param name="job"></param>
+        /// <returns></returns>
+        Task UpdateAsync(Job job);
     }
 }

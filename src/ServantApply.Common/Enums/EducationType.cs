@@ -47,7 +47,7 @@ namespace ServantApply.Common.Enums
                 case EducationType.College: return "本科";
                 case EducationType.Master: return "硕士";
                 case EducationType.Doctor: return "博士";
-                default: return "";
+                default: return "不限";
             }
         }
 

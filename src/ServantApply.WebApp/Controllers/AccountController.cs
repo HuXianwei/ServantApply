@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using ServantApply.Common;
+using ServantApply.Common.Enums;
 using ServantApply.Common.IManagers;
 using ServantApply.Common.Models;
 using ServantApply.Common.ViewModels;
@@ -71,10 +72,7 @@ namespace ServantApply.WebApp.Controllers
                 result.Message = "用户名或密码错误！";
                 return Json(result);
             }
-            string role = "User";
-            if (user.Name == "sysuser")
-                role = "System";
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name, ClaimValueTypes.String), new Claim(ClaimTypes.Role, role, ClaimValueTypes.String) };
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, customer.Name, ClaimValueTypes.String), new Claim(ClaimTypes.Role, ((RoleType)customer.Role).GetDescription(), ClaimValueTypes.String), new Claim(ClaimTypes.Sid, customer.Id.ToString(), ClaimValueTypes.String) };
             var userIdentity = new ClaimsIdentity(claims, "Customer");
             var userPrincipal = new ClaimsPrincipal(userIdentity);
             await HttpContext.Authentication.SignInAsync("IdeaCoreUser", userPrincipal,

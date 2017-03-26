@@ -31,6 +31,7 @@ namespace ServantApply.WebApp.Controllers
             //userManager.CreateAsync(user);
             var name = HttpContext.User.Identity.FullName();
             var role = HttpContext.User.Identity.Role();
+            var id = HttpContext.User.Identity.Uid();
             return View();
         }
 

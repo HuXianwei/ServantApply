@@ -31,7 +31,7 @@ namespace ServantApply.Common.Enums
             {
                 case SexType.Man:return "男";
                 case SexType.Woman:return "女";
-                default: return "";
+                default: return "不限";
             }
         }
     public static int GetValue(this SexType type)

@@ -5,55 +5,50 @@
 @using ServantApply.WebApp.Helpers
 @model Job
 @{
-    ViewData["Title"] = "新增岗位";
+    ViewData["Title"] = "编辑岗位";
 }
-@*<script>
-function operate() {
-            // jquery 表单提交
-            $("#form").ajaxSubmit(function(message) {
-                alert("创建成功");
-               });
 
-            return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
-        }
-</script>*@
-@using (Html.BeginForm("save","job", new { name = "form", id = "form" }))
+@using (Html.BeginForm("saveEdit", "job",new {pid=Model.Id}))
 {
-<div class="container" style="height:750px;" id="jobList">
+    <div class="container" style="height:750px;" id="jobList">
         <div class="row">
             <h1><span class="glyphicon glyphicon-pencil"></span>@ViewData["Title"]</h1>
+            @*<div style="display:none">
+                @Html.TextBoxFor(model => model.Id, new {Value=Model.Id})
+            </div>*@
         </div>
+        @Html.Hidden("Id", Model.Id)
         <div class="form-group">
             <label for="Name">岗位名称</label>
-            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" ,Value=Model.Name})
             @Html.ValidationMessageFor(model => model.Name, "", htmlAttributes: new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label for="Content">岗位内容</label>
-            @Html.TextBoxFor(model => model.Content, new { @class = "form-control" })
+            @Html.TextBoxFor(model => model.Content, new { @class = "form-control" ,Value=Model.Content})
             @Html.ValidationMessageFor(model => model.Content, "", htmlAttributes: new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label for="Organization">所属单位</label>
-            @Html.TextBoxFor(model => model.Organization, new { @class = "form-control" })
+            @Html.TextBoxFor(model => model.Organization, new { @class = "form-control",Value=Model.Organization})
             @Html.ValidationMessageFor(model => model.Organization, "", htmlAttributes: new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label for="Address">所在地址</label>
-            @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+            @Html.TextBoxFor(model => model.Address, new { @class = "form-control",Value=Model.Address})
             @Html.ValidationMessageFor(model => model.Address, "", htmlAttributes: new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label for="AgeAsk">年龄要求</label>
-            @Html.TextBoxFor(model => model.AgeAsk, new { @class = "form-control" })
+            @Html.TextBoxFor(model => model.AgeAsk, new { @class = "form-control",Value=Model.AgeAsk})
             @Html.ValidationMessageFor(model => model.AgeAsk, "", htmlAttributes: new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <div>
                 @Html.Label("SexAsk", "性别要求")
-            </div>   
+            </div>
             <div class="form-inline">
-                @Html.DropDownListFor(model => model.SexAsk, SexTypeHelper.GetItems(showNull: true), new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.SexAsk, SexTypeHelper.GetItems(type: Model.SexAsk,showNull: true), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.SexAsk, "", htmlAttributes: new { @class = "text-danger" })
             </div>
         </div>
@@ -62,14 +57,14 @@ function operate() {
                 @Html.Label("EducationAsk", "学历要求")
             </div>
             <div class="form-inline">
-                @Html.DropDownListFor(modl => Model.EducationAsk, EducationTypeHelper.GetItems(showNull: true), new { @class = "form-control" })
+                @Html.DropDownListFor(modl => Model.EducationAsk, EducationTypeHelper.GetItems(type:Model.EducationAsk, showNull: true), new { @class = "form-control"})
                 @Html.ValidationMessageFor(model => model.EducationAsk, "", htmlAttributes: new { @class = "text-danger" })
             </div>
         </div>
         <div>
-            <span  style="margin-right:100px;margin-left:400px"><button type="submit" class="btn btn-primary">创建</button></span>
+            <span style="margin-right:100px;margin-left:400px"><button type="submit" class="btn btn-primary">保存</button></span>
             <span><a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-primary">返回</a></span>
         </div>
- </div>
+    </div>
 }
 

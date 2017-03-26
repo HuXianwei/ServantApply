@@ -19,7 +19,7 @@ namespace ServantApply.WebApp.Helpers
         {
             List<SelectListItem> list = new List<SelectListItem>();
             if (showNull)
-                list.Add(new SelectListItem { Text = "请选择", Value = "0"});
+                list.Add(new SelectListItem { Text = "不限", Value = "0"});
             foreach (EducationType item in Enum.GetValues(typeof(EducationType)))
             {
                 list.Add(new SelectListItem { Text = item.GetDescription(), Value = item.GetValue().ToString(), Selected = type == item.GetValue() ? true : false });
