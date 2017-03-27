@@ -1,0 +1,140 @@
+﻿
+@model List<RecordModel>
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            var id = 0;
+            var is_success = false;
+            $(".check-success").click(function () {
+                id = $(this).data("id");
+                is_success = true;
+                $('#myModal').modal('show');
+            });
+
+            $(".check-fail").click(function () {
+                id = $(this).data("id");
+                is_success = false;
+                $('#myModal').modal('show');
+            });
+
+            $("#submit-modal").click(function () {
+                if (is_success) {
+                    $.post("/Record/CheckJobSuccess", { id: id, memo: $("#Memo").val() }, function (result) {
+                        if (result.isSuccess) {
+                            window.location.reload();
+                        } else {
+                            alert(result.message);
+                        }
+                    });
+                } else {
+                    $.post("/Record/CheckJobFail", { id: id, memo: $("#Memo").val() }, function (result) {
+                        if (result.isSuccess) {
+                            window.location.reload();
+                        } else {
+                            alert(result.message);
+                        }
+                    });
+                }
+                
+            });
+        })
+    </script>
+}
+
+<ul class="nav nav-pills" role="tablist" style="margin-top: 20px;">
+    @if ((int)ViewData["Status"] == JobCheckStatus.WaitCheck.GetVaule())
+    {
+        <li role="presentation" class="active"><a href="/Record/CheckJobList?status=@JobCheckStatus.WaitCheck.GetVaule()">待审核 <span class="badge">@ViewData["WaitCount"]</span></a></li>
+    }
+    else
+    {
+        <li role="presentation"><a href="/Record/CheckJobList?status=@JobCheckStatus.WaitCheck.GetVaule()">待审核 <span class="badge">@ViewData["WaitCount"]</span></a></li>
+    }
+    @if ((int)ViewData["Status"] == JobCheckStatus.CheckSuccess.GetVaule())
+    {
+        <li role="presentation" class="active"><a href="/Record/CheckJobList?status=@JobCheckStatus.CheckSuccess.GetVaule()">审核通过<span class="badge">@ViewData["SuccessCount"]</span></a></li>
+    }
+    else
+    {
+        <li role="presentation"><a href="/Record/CheckJobList?status=@JobCheckStatus.CheckSuccess.GetVaule()">审核通过<span class="badge">@ViewData["SuccessCount"]</span></a></li>
+    }
+    @if ((int)ViewData["Status"] == JobCheckStatus.CheckFail.GetVaule())
+    {
+        <li role="presentation" class="active"><a href="/Record/CheckJobList?status=@JobCheckStatus.CheckFail.GetVaule()">审核不通过 <span class="badge">@ViewData["FailCount"]</span></a></li>
+    }
+    else
+    {
+        <li role="presentation"><a href="/Record/CheckJobList?status=@JobCheckStatus.CheckFail.GetVaule()">审核不通过 <span class="badge">@ViewData["FailCount"]</span></a></li>
+    }
+    
+    
+</ul>
+<hr />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>岗位名称</th>
+            <th>报名考生</th>
+            <th>报名时间</th>
+            <th>审核状态</th>
+            @if ((int)ViewData["Status"] == JobCheckStatus.WaitCheck.GetVaule())
+            {
+                <th>操作</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            for (var i = 0; i < Model.Count; i++)
+            {
+                var item = Model[i];
+                <tr>
+                    <th scope="row">@(i + 1)</th>
+                    <td>@item.JobName</td>
+                    <td>@item.UserName</td>
+                    <td>@item.Time.ToString("yyyy-MM-dd hh-MM-ss")</td>
+                    <td>@(((JobCheckStatus)item.Status).GetDescription())</td>
+                    @if ((int)ViewData["Status"] == JobCheckStatus.WaitCheck.GetVaule())
+                    {
+                        <td><a href="javascript:void(0)" class="check-success" data-id="@item.Id">审核通过</a>&nbsp&nbsp&nbsp&nbsp<a href="javascript:void(0)" class="check-fail" data-id="@item.Id">审核不通过</a></td>
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">审核备注</h3>
+            </div>
+            <div class="modal-body">
+                @*<form>
+                    <div class="form-group">
+                        @Html.Label("Memo", "备注：", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10 form-inline">
+                            @Html.TextArea("Memo", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </form>*@
+                <form>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label col-md-2">备注:</label>
+                        <textarea class="form-control" id="Memo" style="width:80%" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="submit-modal">提交</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -22,7 +22,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, "密码", new { @class = "control-label col-md-2" })
             <div class="col-md-10 form-inline">
-                @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", type = "password" })
                 @Html.ValidationMessageFor(model => model.Password, "", htmlAttributes: new { @class = "text-danger" })
             </div>
         </div>
