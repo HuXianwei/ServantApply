@@ -26,6 +26,7 @@ namespace ServantApply.Common.ViewModels
         /// <summary>
         /// 密码
         /// </summary>
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "密码不能为空")]
         [MinLength(6, ErrorMessage = "密码不能小于6个字符")]
         [MaxLength(30, ErrorMessage = "密码不能超过30个字符")]
@@ -40,6 +41,7 @@ namespace ServantApply.Common.ViewModels
         /// <summary>
         /// 确认密码
         /// </summary>
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "请输入确认密码")]
         [Compare("Password", ErrorMessage = "确认密码不一致")]
         public string SurePassword { get; set; }

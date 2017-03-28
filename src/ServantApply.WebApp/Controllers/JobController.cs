@@ -35,7 +35,7 @@ namespace ServantApply.WebApp.Controllers
             var id = HttpContext.User.Identity.Uid();
             job.CreaterId = id;
             await jobManager.CreateAsync(job);
-            return RedirectToAction("index", "home");
+            return RedirectToAction("JobList", "Job");
         }
 
         /// <summary>
@@ -44,13 +44,11 @@ namespace ServantApply.WebApp.Controllers
         /// <returns></returns>
         public async Task<IActionResult> JobList()
         {
-            long createrId = 1;
-            //var jobs =await jobManager.JobList(createrId);
-            List<Job> jobs = await jobManager.JobList(createrId);
+            List<Job> jobs = await jobManager.JobList(HttpContext.User.Identity.Uid());
             return View("jobList",jobs);
         }
+
         /// <summary>
-        /// 
         /// 显示岗位详情
         /// </summary>
         /// <param name="id"></param>
@@ -60,6 +58,7 @@ namespace ServantApply.WebApp.Controllers
             var job = await jobManager.GetDetails(id);
             return View("Details",job);
         }
+
         /// <summary>
         /// 显示修改界面
         /// </summary>
