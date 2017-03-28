@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ServantApply.Common;
 using ServantApply.Common.Enums;
 using ServantApply.Common.IManagers;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace ServantApply.WebApp.Controllers
 {
+    [Authorize]
     public class RecordController : Controller
     {
         private readonly IRecordManager recordManager;
@@ -24,6 +26,7 @@ namespace ServantApply.WebApp.Controllers
         /// 获取待审核的岗位列表
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "System")]
         public async Task<IActionResult> CheckJobList(int status)
         {
             var list = await recordManager.GetRecordsAsync(status);
@@ -40,6 +43,7 @@ namespace ServantApply.WebApp.Controllers
         /// <param name="id"></param>
         /// <param name="memo"></param>
         /// <returns></returns>
+        [Authorize(Roles = "System")]
         public async Task<IActionResult> CheckJobSuccess(long id, string memo)
         {
             ReturnResult result = await recordManager.CheckRecordAsync(id, memo, HttpContext.User.Identity.Uid(), (int)JobCheckStatus.CheckSuccess);
@@ -52,6 +56,7 @@ namespace ServantApply.WebApp.Controllers
         /// <param name="id"></param>
         /// <param name="memo"></param>
         /// <returns></returns>
+        [Authorize(Roles = "System")]
         public async Task<IActionResult> CheckJobFail(long id, string memo)
         {
             ReturnResult result = await recordManager.CheckRecordAsync(id, memo, HttpContext.User.Identity.Uid(), (int)JobCheckStatus.CheckFail);

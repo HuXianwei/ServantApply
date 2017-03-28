@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ServantApply.Common;
 using ServantApply.Common.IManagers;
 using ServantApply.Common.Models;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace ServantApply.WebApp.Controllers
 {
+    [Authorize]
     public class JobController:Controller
     {
         private readonly IJobManager jobManager;
@@ -21,6 +23,7 @@ namespace ServantApply.WebApp.Controllers
         /// 显示创建岗位界面
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "System")]
         public IActionResult Create()
         {
             return View();
@@ -30,6 +33,7 @@ namespace ServantApply.WebApp.Controllers
         /// </summary>
         /// <param name="job"></param>
         /// <returns></returns>
+        [Authorize(Roles = "System")]
         public async Task<IActionResult> Save(Job job)
         {
             var id = HttpContext.User.Identity.Uid();
@@ -42,6 +46,7 @@ namespace ServantApply.WebApp.Controllers
         /// 展示我的查询列表
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "System")]
         public async Task<IActionResult> JobList()
         {
             List<Job> jobs = await jobManager.JobList(HttpContext.User.Identity.Uid());
@@ -64,17 +69,19 @@ namespace ServantApply.WebApp.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [Authorize(Roles = "System")]
         public async Task<IActionResult> Edit(long id)
         {
             var job = await jobManager.GetDetails(id);
             return View("Edit",job);
         }
-        
+
         /// <summary>
         /// 修改岗位
         /// </summary>
         /// <param name="job"></param>
         /// <returns></returns>
+        [Authorize(Roles = "System")]
         public async Task<IActionResult> SaveEdit(Job job)
         {
             var id = HttpContext.User.Identity.Uid();
@@ -88,6 +95,7 @@ namespace ServantApply.WebApp.Controllers
         /// </summary>
         /// <param name="job"></param>
         /// <returns></returns>
+        [Authorize(Roles = "System")]
         public async Task<IActionResult> Delete(long id)
         {
             await jobManager.DeleteJob(new Job { Id = id});
@@ -95,6 +103,7 @@ namespace ServantApply.WebApp.Controllers
             return Json(new ReturnResult ());
         }
 
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> AllJob()
         {
             var jobs = await jobManager.QueryAsync();

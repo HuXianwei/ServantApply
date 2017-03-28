@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ServantApply.Common;
 using ServantApply.Common.Enums;
 using ServantApply.Common.IManagers;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace ServantApply.WebApp.Controllers
 {
+    [Authorize]
     public class CandidateController:Controller
     {
         private readonly ICandidateManager candidateManager;
@@ -25,6 +27,7 @@ namespace ServantApply.WebApp.Controllers
         /// </summary>
         /// <param name="jobId"></param>
         /// <returns></returns>
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Enter(long jobId)
         {
             ReturnResult result = new ReturnResult();
