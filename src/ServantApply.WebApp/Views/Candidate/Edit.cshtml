@@ -5,55 +5,57 @@
 @using ServantApply.WebApp.Helpers
 @model Candidate
 @{
-    ViewData["Title"] = "填写报名信息";
+    ViewData["Title"] = "编辑报考信息";
 }
-@using (Html.BeginForm("Create", "Candidate", new { name = "form", id = "form" }))
+
+@using (Html.BeginForm("Update", "Candidate"))
 {
-    <div class="container"  id="jobList">
+    <div class="container"  id="candidateList">
         <div class="row">
             <h1><span class="glyphicon glyphicon-pencil"></span>@ViewData["Title"]</h1>
         </div>
+        @Html.Hidden("Id", Model.Id)
         <div class="form-group">
-            <label for="TrueName">真实姓名</label>
-            @Html.TextBoxFor(model => model.TrueName, new { @class = "form-control" })
+            <label for="Name">真实姓名</label>
+            @Html.TextBoxFor(model => model.TrueName, new { @class = "form-control", Value = Model.TrueName })
             @Html.ValidationMessageFor(model => model.TrueName, "", htmlAttributes: new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label for="Tell">电话</label>
-            @Html.TextBoxFor(model => model.Tell, new { @class = "form-control" })
+            @Html.TextBoxFor(model => model.Tell, new { @class = "form-control", Value = Model.Tell })
             @Html.ValidationMessageFor(model => model.Tell, "", htmlAttributes: new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label for="Address">地址</label>
-            @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+            @Html.TextBoxFor(model => model.Address, new { @class = "form-control", Value = Model.Address })
             @Html.ValidationMessageFor(model => model.Address, "", htmlAttributes: new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label for="School">学校</label>
-            @Html.TextBoxFor(model => model.School, new { @class = "form-control" })
+            @Html.TextBoxFor(model => model.School, new { @class = "form-control", Value = Model.School })
             @Html.ValidationMessageFor(model => model.School, "", htmlAttributes: new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label for="Age">年龄</label>
-            @Html.TextBoxFor(model => model.Age, new { @class = "form-control" })
+            @Html.TextBoxFor(model => model.Age, new { @class = "form-control", Value = Model.Age })
             @Html.ValidationMessageFor(model => model.Age, "", htmlAttributes: new { @class = "text-danger" })
         </div>
         <div class="form-group">
-            <label for="Nation">民族</label>
-            @Html.TextBoxFor(model => model.Nation, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Nation, "", htmlAttributes: new { @class = "text-danger" })
+            <label for="Card">身份证号</label>
+            @Html.TextBoxFor(model => model.Card, new { @class = "form-control", Value = Model.Card })
+            @Html.ValidationMessageFor(model => model.Card, "", htmlAttributes: new { @class = "text-danger" })
         </div>
         <div class="form-group">
-            <label for="Card">身份证号</label>
-            @Html.TextBoxFor(model => model.Card, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Card, "", htmlAttributes: new { @class = "text-danger" })
+            <label for="Nation">民族</label>
+            @Html.TextBoxFor(model => model.Nation, new { @class = "form-control", Value = Model.Nation })
+            @Html.ValidationMessageFor(model => model.Nation, "", htmlAttributes: new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <div>
                 @Html.Label("Sex", "性别")
             </div>
             <div class="form-inline">
-                @Html.DropDownListFor(model => model.Sex, SexTypeHelper.GetItems(), new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Sex, SexTypeHelper.GetItems(type: Model.Sex, showNull: true), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Sex, "", htmlAttributes: new { @class = "text-danger" })
             </div>
         </div>
@@ -62,23 +64,23 @@
                 @Html.Label("Education", "学历")
             </div>
             <div class="form-inline">
-                @Html.DropDownListFor(modl => Model.Education, EducationTypeHelper.GetItems(), new { @class = "form-control" })
+                @Html.DropDownListFor(modl => Model.Education, EducationTypeHelper.GetItems(type: Model.Education, showNull: true), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Education, "", htmlAttributes: new { @class = "text-danger" })
             </div>
         </div>
-       <div class="form-group">
-          <div>
-            @Html.Label("Politics", "政治面貌")
-          </div>
-          <div class="form-inline">
-            @Html.DropDownListFor(modl => Model.Politics, PoliticsTypeHelper.GetItems(), new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Politics, "", htmlAttributes: new { @class = "text-danger" })
-          </div>
+        <div class="form-group">
+            <div>
+                @Html.Label("Politics", "政治面貌")
+            </div>
+            <div class="form-inline">
+                @Html.DropDownListFor(modl => Model.Politics, PoliticsTypeHelper.GetItems(type: Model.Politics, showNull: true), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Politics, "", htmlAttributes: new { @class = "text-danger" })
+            </div>
         </div>
         <div>
-            <span style="margin-right:100px;margin-left:400px"><button type="submit" class="btn btn-primary">确定</button></span>
+            <span style="margin-right:100px;margin-left:400px"><button type="submit" class="btn btn-primary">保存</button></span>
             <span><a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-primary">返回</a></span>
         </div>
-  </div>
+    </div>
 }
 

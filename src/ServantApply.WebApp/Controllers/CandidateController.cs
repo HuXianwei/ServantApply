@@ -46,10 +46,66 @@ namespace ServantApply.WebApp.Controllers
             //ViewData["jobId"] = jobId;
             //return View("Message");
         }
+        /// <summary>
+        /// 显示填写个人信息界面
+        /// </summary>
+        /// <returns></returns>
 
         public IActionResult Message()
         {
             return View();
+        }
+        /// <summary>
+        /// 个人报考信息管理
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> PersonMessage()
+        {
+            var id = HttpContext.User.Identity.Uid();
+            var candidate = await candidateManager.GetCandidate(id);
+            if (candidate == null)
+            {
+                return View("Message");
+            }else
+            {
+                return View("PersonMessage", candidate);
+            }
+        }
+        /// <summary>
+        /// 增添个人报考信息
+        /// </summary>
+        /// <param name="candidate"></param>
+        /// <returns></returns>
+
+        public async Task<IActionResult> Create(Candidate candidate)
+        {
+            var id = HttpContext.User.Identity.Uid();
+            candidate.UserId = id;
+            await candidateManager.CreateCandidate(candidate);
+            return RedirectToAction("index", "Home");
+        }
+
+        /// <summary>
+        /// 显示编辑界面
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> GetEdit()
+        {
+            var id= HttpContext.User.Identity.Uid();
+            var candidate = await candidateManager.GetCandidate(id);
+            return View("Edit",candidate);
+        }
+        /// <summary>
+        /// 更新报考信息
+        /// </summary>
+        /// <param name="candidate"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> update(Candidate candidate)
+        {
+            var id = HttpContext.User.Identity.Uid();
+            candidate.UserId = id;
+            await candidateManager.update(candidate);
+            return RedirectToAction("index","Home");
         }
     }
 }

@@ -22,7 +22,7 @@ namespace ServantApply.WebApp.Helpers
             }
             foreach (PoliticsType item in Enum.GetValues(typeof(PoliticsType)))
             {
-                list.Add(new SelectListItem { Text=item.getDescription(),Value=item.getValue().ToString(),Selected=type==item.getValue()?true:false});
+                list.Add(new SelectListItem { Text=item.GetDescription(),Value=item.getValue().ToString(),Selected=type==item.getValue()?true:false});
             }
             return list;
         }

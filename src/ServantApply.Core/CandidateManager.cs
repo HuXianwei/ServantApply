@@ -17,10 +17,15 @@ namespace ServantApply.Core
         {
             this.context = context;
         }
-
-        public Task CreateCandidate(Candidate candidate)
+        /// <summary>
+        /// 新增报考信息
+        /// </summary>
+        /// <param name="candidate"></param>
+        /// <returns></returns>
+        public async Task CreateCandidate(Candidate candidate)
         {
-            throw new NotImplementedException();
+            context.Candidate.Add(candidate);
+            await context.SaveChangesAsync();
         }
 
         /// <summary>
@@ -33,6 +38,16 @@ namespace ServantApply.Core
         {
             var candidate = await context.Candidate.SingleOrDefaultAsync(c=>c.Id==id);
             return candidate;
+        }
+        /// <summary>
+        /// 更新报考信息
+        /// </summary>
+        /// <param name="candidate"></param>
+        /// <returns></returns>
+        public async Task update(Candidate candidate)
+        {
+            context.Candidate.Update(candidate);
+            await context.SaveChangesAsync();
         }
     }
 }

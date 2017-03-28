@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Candidate
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+        <span>个人信息详情</span>
+        <span  style="float:right"><a class="btn btn-danger" asp-action="GetEdit" asp-controller="Candidate">编辑</a></span>
+        </h4>
+    </div>
+    <table class="table">
+        <tr><td><b>姓名</b></td><td>@Model.TrueName</td></tr>
+        <tr><td><b>电话</b></td><td>@Model.Tell</td></tr>
+        <tr><td><b>地址</b></td><td>@Model.Address</td></tr>
+        <tr><td><b>学校</b></td><td>@Model.School</td></tr>
+        <tr><td><b>年龄</b></td><td>@Model.Age</td></tr>
+        <tr><td><b>性别</b></td><td>@(((SexType)Model.Sex).GetDescription())</td></tr>
+        <tr><td><b>学历</b></td><td>@(((EducationType)Model.Education).GetDescription())</td></tr>
+        <tr><td><b>身份证号</b></td><td>@Model.Card</td></tr>
+        <tr><td><b>民族</b></td><td>@Model.Nation</td></tr>
+        <tr><td><b>政治面貌</b></td><td>@(((PoliticsType)Model.Politics).GetDescription())</td></tr>
+    </table>
+</div>
