@@ -17,9 +17,13 @@ namespace ServantApply.WebApp.Controllers
     public class RecordController : Controller
     {
         private readonly IRecordManager recordManager;
-        public RecordController(IRecordManager recordManager)
+        private readonly IJobManager jobManager;
+        private readonly ICandidateManager candidateManager;
+        public RecordController(IRecordManager recordManager, IJobManager jobManager, ICandidateManager candidateManager)
         {
             this.recordManager = recordManager;
+            this.jobManager = jobManager;
+            this.candidateManager = candidateManager;
         }
 
         /// <summary>
@@ -63,11 +67,49 @@ namespace ServantApply.WebApp.Controllers
             return Json(result);
         }
 
+        /// <summary>
+        /// 我的报考记录
+        /// </summary>
+        /// <returns></returns>
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> MyRecord()
         {
             var userId= HttpContext.User.Identity.Uid();
             List<RecordModel> list = await recordManager.GetRecord(userId);
             return View("MyRecord",list);
+        }
+
+        /// <summary>
+        /// 查看岗位详情
+        /// </summary>
+        /// <param name="jobId"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> ViewJob(long jobId)
+        {
+            var job = await jobManager.GetDetails(jobId);
+            return View("Details", job);
+        }
+
+        /// <summary>
+        /// 查看考生详情
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> ViewUser(long userId)
+        {
+            var candidate = await candidateManager.GetCandidate(userId);
+            return View("UserMessage", candidate);
+        }
+
+        /// <summary>
+        /// 打印准考证
+        /// </summary>
+        /// <returns></returns>
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> PrintMessage(long recordId)
+        {
+            CandidateModel candidateModel = await recordManager.PrintMessage(recordId);
+            return View("PrintMessage", candidateModel);
         }
     }
 }

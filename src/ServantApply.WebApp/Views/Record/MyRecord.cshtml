@@ -29,7 +29,7 @@
                         <td>@item.Time.ToString("yyyy-MM-dd")</td>
                         <td>@(((JobCheckStatus)item.Status).GetDescription())</td>
                         <td>@item.Memo</td>
-                        <td class="btn btn-danger"><a href="/Record/PrintMessage" ><font style="color:black;font-weight:bold;">打印准考证</font></a></td>
+                        <td class="btn btn-danger"><a href="/Record/PrintMessage?recordId=@item.Id" ><font style="color:black;font-weight:bold;">打印准考证</font></a></td>
                     </tr>
                 }
             }

@@ -134,7 +134,7 @@ namespace ServantApply.Core
         public async Task<CandidateModel> PrintMessage(long recordId)
         {
             var record = await context.Record.SingleOrDefaultAsync(c => c.Id == recordId);
-            var candidate = await context.Candidate.SingleOrDefaultAsync(a => a.Id == record.UserId);
+            var candidate = await context.Candidate.SingleOrDefaultAsync(a => a.UserId == record.UserId);
             var job = await context.Job.SingleOrDefaultAsync(b => b.Id == record.JobId);
             CandidateModel candidateModel = new CandidateModel(candidate);
             candidateModel.JobId = job.Id;

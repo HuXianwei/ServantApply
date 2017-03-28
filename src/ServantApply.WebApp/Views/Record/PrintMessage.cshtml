@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using ServantApply.WebApp.Helpers
+@using ServantApply.Common.Enums
+@model CandidateModel
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+            准考证信息
+            <span style="float:right"><a class="btn btn-primary" asp-action="CheckJobList" asp-controller="Record" asp-route-status="1">返回</a></span>
+        </h4>
+
+    </div>
+    <table class="table">
+        <tr><td><b>姓名</b></td><td>@Model.TrueName</td></tr>
+        <tr><td><b>年龄</b></td><td>@Model.Age</td></tr>
+        <tr><td><b>性别</b></td><td>@(((SexType)Model.Sex).GetDescription())</td></tr>
+        <tr><td><b>学历</b></td><td>@(((EducationType)Model.Education).GetDescription())</td></tr>
+        <tr><td><b>岗位</b></td><td>@Model.JobName</td></tr>
+        <tr><td><b>岗位编号</b></td><td>@Model.JobId.ToString("D8")</td></tr>
+        <tr><td><b>毕业学校</b></td><td>@Model.School</td></tr>
+        <tr><td><b>准考证号</b></td><td>@Model.Id.ToString("D8")</td></tr>
+    </table>
+</div>
+<div style="text-align:center;">
+    <span><a href="javascript:void(0)" class="btn btn-primary">确认打印</a></span>
+</div>
+
+

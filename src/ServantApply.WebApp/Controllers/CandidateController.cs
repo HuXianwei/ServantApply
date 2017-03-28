@@ -59,7 +59,7 @@ namespace ServantApply.WebApp.Controllers
         /// 显示填写个人信息界面
         /// </summary>
         /// <returns></returns>
-
+        [Authorize(Roles = "User")]
         public IActionResult Message()
         {
             return View();
@@ -68,6 +68,7 @@ namespace ServantApply.WebApp.Controllers
         /// 个人报考信息管理
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> PersonMessage()
         {
             var id = HttpContext.User.Identity.Uid();
@@ -85,7 +86,7 @@ namespace ServantApply.WebApp.Controllers
         /// </summary>
         /// <param name="candidate"></param>
         /// <returns></returns>
-
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Create(Candidate candidate)
         {
             var id = HttpContext.User.Identity.Uid();
@@ -98,6 +99,7 @@ namespace ServantApply.WebApp.Controllers
         /// 显示编辑界面
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> GetEdit()
         {
             var id= HttpContext.User.Identity.Uid();
@@ -109,6 +111,7 @@ namespace ServantApply.WebApp.Controllers
         /// </summary>
         /// <param name="candidate"></param>
         /// <returns></returns>
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> update(Candidate candidate)
         {
             var id = HttpContext.User.Identity.Uid();

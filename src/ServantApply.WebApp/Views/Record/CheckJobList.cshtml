@@ -93,8 +93,8 @@
                 var item = Model[i];
                 <tr>
                     <th scope="row">@(i + 1)</th>
-                    <td>@item.JobName</td>
-                    <td>@item.UserName</td>
+                    <td><a href="/Record/ViewJob?jobId=@item.JobId">@item.JobName</a></td>
+                    <td><a href="/Record/ViewUser?userId=@item.UserId">@item.UserName</a></td>
                     <td>@item.Time.ToString("yyyy-MM-dd hh-MM-ss")</td>
                     <td>@(((JobCheckStatus)item.Status).GetDescription())</td>
                     @if ((int)ViewData["Status"] == JobCheckStatus.WaitCheck.GetVaule())
