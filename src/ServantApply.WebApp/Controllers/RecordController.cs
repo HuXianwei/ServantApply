@@ -2,6 +2,8 @@
 using ServantApply.Common;
 using ServantApply.Common.Enums;
 using ServantApply.Common.IManagers;
+using ServantApply.Common.Models;
+using ServantApply.Common.ViewModels;
 using ServantApply.WebApp.Helpers;
 using System;
 using System.Collections.Generic;
@@ -54,6 +56,13 @@ namespace ServantApply.WebApp.Controllers
         {
             ReturnResult result = await recordManager.CheckRecordAsync(id, memo, HttpContext.User.Identity.Uid(), (int)JobCheckStatus.CheckFail);
             return Json(result);
+        }
+
+        public async Task<IActionResult> MyRecord()
+        {
+            var userId= HttpContext.User.Identity.Uid();
+            List<RecordModel> list = await recordManager.GetRecord(userId);
+            return View("MyRecord",list);
         }
     }
 }

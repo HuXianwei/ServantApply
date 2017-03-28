@@ -102,6 +102,8 @@ namespace ServantApply.WebApp.Controllers
             User user = userModel.GetUser();
             //密码加密
             user.Password = GetMD5(user.Password);
+            //默认普通用户
+            user.Role = (int)RoleType.User;
             //存储用户注册信息
             await userManager.RegisterAsync(user);
             //保存成功后自动登录

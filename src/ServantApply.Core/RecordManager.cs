@@ -32,6 +32,18 @@ namespace ServantApply.Core
         }
 
         /// <summary>
+        /// 根据用户ID和岗位ID获取报考记录
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="jobId"></param>
+        /// <returns></returns>
+        public async Task<Record> GetRecordAsync(long userId, long jobId)
+        {
+            var record = await context.Record.Where(c => (c.UserId == userId && c.JobId == jobId)).FirstOrDefaultAsync();
+            return record;
+        }
+
+        /// <summary>
         /// 根据状态获取报考记录
         /// </summary>
         /// <param name="status"></param>
@@ -91,6 +103,43 @@ namespace ServantApply.Core
         public async Task<int> GetRecordCountAsync(int status)
         {
             return await context.Record.Where(c => c.Status == status).CountAsync();
+        }
+
+        /// <summary>
+        /// 根据用户Id获取报考报考记录
+        /// </summary>
+        /// <param name="useId"></param>
+        /// <returns></returns>
+        public async Task<List<RecordModel>> GetRecord(long userId)
+        {
+            List<Record> list = await context.Record.Where(c => c.UserId == userId).ToListAsync();
+            List<RecordModel> records = new List<RecordModel>();
+            if (list == null)
+                return records;
+            foreach (var item in list)
+            {
+                RecordModel model = new RecordModel(item);
+                model.UserName = (await context.User.SingleOrDefaultAsync(c => c.Id == item.UserId)).Name;
+                model.JobName = (await context.Job.SingleOrDefaultAsync(c => c.Id == item.JobId)).Name;
+                records.Add(model);
+            }
+            return records;
+        }
+
+        /// <summary>
+        /// 打印准考证
+        /// </summary>
+        /// <param name="recordId"></param>
+        /// <returns></returns>
+        public async Task<CandidateModel> PrintMessage(long recordId)
+        {
+            var record = await context.Record.SingleOrDefaultAsync(c => c.Id == recordId);
+            var candidate = await context.Candidate.SingleOrDefaultAsync(a => a.Id == record.UserId);
+            var job = await context.Job.SingleOrDefaultAsync(b => b.Id == record.JobId);
+            CandidateModel candidateModel = new CandidateModel(candidate);
+            candidateModel.JobId = job.Id;
+            candidateModel.JobName = job.Name;
+            return candidateModel;
         }
     }
 }

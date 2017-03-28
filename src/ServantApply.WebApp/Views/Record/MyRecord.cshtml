@@ -1,0 +1,38 @@
+﻿@model List<RecordModel>
+
+@{
+    ViewData["Title"] = "我的报考";
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>我的报考</h3>
+    </div>
+    <div>
+        <table class="table table-hover">
+            <tr>
+                <th>序号</th>
+                <th>岗位名称</th>
+                <th>报名考生</th>
+                <th>报名时间</th>
+                <th>审核状态</th>
+                <th>审核备注</th>
+            </tr>
+
+            @{
+                for (var i = 0; i < Model.Count; i++)
+                {
+                    var item = Model[i];
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@item.JobName</td>
+                        <td>@item.UserName</td>
+                        <td>@item.Time.ToString("yyyy-MM-dd")</td>
+                        <td>@(((JobCheckStatus)item.Status).GetDescription())</td>
+                        <td>@item.Memo</td>
+                        <td class="btn btn-danger"><a href="/Record/PrintMessage" ><font style="color:black;font-weight:bold;">打印准考证</font></a></td>
+                    </tr>
+                }
+            }
+        </table>
+     </div>
+</div>

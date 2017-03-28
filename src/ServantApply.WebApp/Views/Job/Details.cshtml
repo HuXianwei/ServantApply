@@ -6,15 +6,20 @@
 @section scripts{
     <script type="text/javascript">
         $(document).on("click", "#join-job", function (event) {
-            $.post("/Candidate/Enter", { id: $(this).attr("data-id") }, function (result) {
+            $.post("/Candidate/Enter", { jobId: $(this).attr("data-id") }, function (result) {
                 if (result.isSuccess) {
                     window.location.href = "/Home/index";
 
                 } else {
-                    var tmp = confirm("个人信息不完整，是否填写？")
-                    if (tmp == true) {
-                        window.open("/Candidate/Message", "_blank");
+                    if (result.message == "NULL_MESSAGE") {
+                        var tmp = confirm("个人信息不完整，是否填写？")
+                        if (tmp == true) {
+                            window.open("/Candidate/Message", "_blank");
+                        }
+                    } else {
+                        alert("您已报考过改岗位，不可重复报考！");
                     }
+                    
                 }
             });
          });   

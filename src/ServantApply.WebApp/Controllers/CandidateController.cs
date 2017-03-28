@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ServantApply.Common;
+using ServantApply.Common.Enums;
 using ServantApply.Common.IManagers;
 using ServantApply.Common.Models;
 using ServantApply.WebApp.Helpers;
@@ -32,13 +33,21 @@ namespace ServantApply.WebApp.Controllers
             if (candidate == null)
             {
                 result.IsSuccess = false;
-            }else
-            {
-                Record record = new Record();
-                record.UserId = candidate.UserId;
-                record.JobId = jobId;
-                await recordManager.Create(record);
+                result.Message = "NULL_MESSAGE";
+                return Json(result);
             }
+            if (await recordManager.GetRecordAsync(id, jobId) != null)
+            {
+                result.IsSuccess = false;
+                result.Message = "HAS_JOINED";
+                return Json(result);
+            }
+            Record record = new Record();
+            record.UserId = candidate.UserId;
+            record.JobId = jobId;
+            record.Time = DateTime.Now;
+            record.Status = (int)JobCheckStatus.WaitCheck;
+            await recordManager.Create(record);
             return Json(result);
             //ViewData["jobId"] = jobId;
             //return View("Message");
