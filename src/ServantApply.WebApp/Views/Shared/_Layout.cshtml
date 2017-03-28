@@ -35,6 +35,7 @@
                         if (Html.ViewContext.HttpContext.User.Identity.Role() == RoleType.User.GetDescription())
                         {
                             <li><a asp-area="" asp-controller="Job" asp-action="AllJob">全部岗位</a></li>
+                            <li><a asp-area="" asp-controller="Candidate" asp-action="PersonMessage">个人报考信息</a></li>
 
                         }
                         else

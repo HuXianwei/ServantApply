@@ -20,9 +20,13 @@ namespace ServantApply.Common.Enums
         /// </summary>
         Citizen =3,
     }
+ 
     public static class PoliticsExtension
     {
-        public static String getDescription(this PoliticsType type)
+        /// <summary>
+        /// 获取政治面貌描述
+        /// </summary>
+        public static String GetDescription(this PoliticsType type)
         {
             switch (type)
             {
@@ -32,6 +36,11 @@ namespace ServantApply.Common.Enums
                 default:return "";
             }
         }
+        /// <summary>
+        /// 获取政治面貌存入的值
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static int getValue(this PoliticsType type)
         {
             return (int)type;

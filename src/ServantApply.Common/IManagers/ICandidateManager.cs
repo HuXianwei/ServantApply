@@ -20,6 +20,13 @@ namespace ServantApply.Common.IManagers
         /// <param name=""></param>
         /// <returns></returns>
         Task CreateCandidate(Candidate candidate);
-       
+
+        /// <summary>
+        /// 
+        /// 更新报考信息
+        /// </summary>
+        /// <param name="candidate"></param>
+        /// <returns></returns>
+        Task update(Candidate candidate);
     }
 }
