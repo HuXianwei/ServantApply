@@ -102,7 +102,10 @@ namespace ServantApply.WebApp.Controllers
 
             return Json(new ReturnResult ());
         }
-
+        /// <summary>
+        /// 显示全部岗位
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "User")]
         public async Task<IActionResult> AllJob()
         {

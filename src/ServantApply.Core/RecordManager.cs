@@ -7,6 +7,7 @@ using ServantApply.Common.Models;
 using ServantApply.Common;
 using Microsoft.EntityFrameworkCore;
 using ServantApply.Common.ViewModels;
+using ServantApply.Common.Enums;
 
 namespace ServantApply.Core
 {
@@ -112,7 +113,7 @@ namespace ServantApply.Core
         /// <returns></returns>
         public async Task<List<RecordModel>> GetRecord(long userId)
         {
-            List<Record> list = await context.Record.Where(c => c.UserId == userId).ToListAsync();
+            List<Record> list = await context.Record.Where(c => c.UserId == userId && c.Status==(int)JobCheckStatus.CheckSuccess).ToListAsync();
             List<RecordModel> records = new List<RecordModel>();
             if (list == null)
                 return records;

@@ -82,6 +82,17 @@ namespace ServantApply.WebApp.Controllers
             }
         }
         /// <summary>
+        /// 显示个人报考信息
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> showMessage()
+        {
+            var id= HttpContext.User.Identity.Uid();
+            var candidate= await candidateManager.GetCandidate(id);
+            return View("PersonMessage", candidate);
+
+        }
+        /// <summary>
         /// 增添个人报考信息
         /// </summary>
         /// <param name="candidate"></param>
@@ -92,7 +103,7 @@ namespace ServantApply.WebApp.Controllers
             var id = HttpContext.User.Identity.Uid();
             candidate.UserId = id;
             await candidateManager.CreateCandidate(candidate);
-            return RedirectToAction("index", "Home");
+            return RedirectToAction("showMessage", "Candidate");
         }
 
         /// <summary>

@@ -8,7 +8,7 @@
         $(document).on("click", "#join-job", function (event) {
             $.post("/Candidate/Enter", { jobId: $(this).attr("data-id") }, function (result) {
                 if (result.isSuccess) {
-                    window.location.href = "/Home/index";
+                    window.location.href = "/Record/MyRecord";
 
                 } else {
                     if (result.message == "NULL_MESSAGE") {
@@ -18,6 +18,7 @@
                         }
                     } else {
                         alert("您已报考过改岗位，不可重复报考！");
+                        window.location.href = "/Job/AllJob";  
                     }
                     
                 }
