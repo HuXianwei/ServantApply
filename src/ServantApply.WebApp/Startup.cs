@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using ServantApply.Common.IManagers;
+﻿using ServantApply.Common.IManagers;
 using ServantApply.Core;
 using ServantApply.Common;
-using MySQL.Data.EntityFrameworkCore.Extensions;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using ServantApply.Common.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
+using MySQL.Data.EntityFrameworkCore.Extensions;
+
 
 namespace ServantApply.WebApp
 {
