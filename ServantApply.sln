@@ -1,20 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4B9D58C1-5E91-49C1-B253-0391A7E698C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{27E4270C-B8BD-4D4B-AA42-68E8FC338CBD}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ServantApply.WebApp", "src\ServantApply.WebApp\ServantApply.WebApp.xproj", "{D8E72723-81ED-4AB5-B242-D31C1FB8973C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServantApply.WebApp", "src\ServantApply.WebApp\ServantApply.WebApp.csproj", "{D8E72723-81ED-4AB5-B242-D31C1FB8973C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ServantApply.Common", "src\ServantApply.Common\ServantApply.Common.xproj", "{7D621F5E-D9C2-46DA-B8D1-55B9CEC73FCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServantApply.Common", "src\ServantApply.Common\ServantApply.Common.csproj", "{7D621F5E-D9C2-46DA-B8D1-55B9CEC73FCA}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ServantApply.Core", "src\ServantApply.Core\ServantApply.Core.xproj", "{5AD026B7-DD04-4260-B3F5-007AB7720BF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServantApply.Core", "src\ServantApply.Core\ServantApply.Core.csproj", "{5AD026B7-DD04-4260-B3F5-007AB7720BF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
